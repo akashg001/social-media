@@ -3,6 +3,7 @@ from .models import user_profile,user_post
 from django.contrib.auth.models import User
 from django.contrib.auth import login as dj_login
 from django.contrib.auth import authenticate
+from home.forms import postimage
 
 
 def index(request):
@@ -18,12 +19,8 @@ def profile_edit(request):
 def post(request):
     if request.session.has_key('is_logged'):
         if request.method=='POST':
-            upload=request.POST['upload']
-            caption = request.POST['caption']
-                  
-
-
-    #return HttpResponse("this is post page")
+            form=postimageform(request.POST,request.FILES)
+            form.save()
 
 def handle_register(request):
     if request.method == 'POST':

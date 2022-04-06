@@ -16,7 +16,14 @@ def profile(request):
 def profile_edit(request):
     return HttpResponse("this is profile edit page")
 def post(request):
-    return HttpResponse("this is post page")
+    if request.session.has_key('is_logged'):
+        if request.method=='POST':
+            upload=request.POST['upload']
+            caption = request.POST['caption']
+                  
+
+
+    #return HttpResponse("this is post page")
 
 def handle_register(request):
     if request.method == 'POST':

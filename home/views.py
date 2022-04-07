@@ -21,6 +21,8 @@ def post(request):
         if request.method=='POST':
             form=postimageform(request.POST,request.FILES)
             form.save()
+            img_obj = form.instance
+            return redirect("")
 
 def handle_register(request):
     if request.method == 'POST':

@@ -15,7 +15,7 @@ class user_post(models.Model):
     likes= models.BigIntegerField()
     caption = models.CharField(max_length=200)
     comment = models.TextField(max_length=1000)
-    date = models.DateTimeField(auto_now=True, auto_now_add=True)
+    date = models.DateTimeField(auto_now=True, auto_now_add=False)
     slug= models.SlugField(unique=True, null=False)
     class meta:
         db_table:'userpost'

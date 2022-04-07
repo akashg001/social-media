@@ -10,6 +10,8 @@ urlpatterns = [
     path('profile_edit/',views.profile_edit,name="profile_edit"),
     path('post/',views.post,name="post"),
     path('handle_register/',views.handle_register,name="handle_register"),
-    path('handlelogin/',views.handlelogin,name="handlelogin")
+    path('handlelogin/',views.handlelogin,name="handlelogin"),
+    path('post/',views.post,name="post"),
+    path('upload/',views.upload,name="upload")
     
  ]

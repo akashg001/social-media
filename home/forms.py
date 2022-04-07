@@ -6,4 +6,4 @@ from django import forms
 class postimage(forms.ModelForm):
     class meta:
         models=user_post
-        fields='__all__'
+        fields=('caption','image')

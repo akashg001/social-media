@@ -7,11 +7,16 @@ from home.forms import postimage
 
 
 def index(request):
-    return HttpResponse("this is social media")
+    caption = request.session['caption']
+    photo = request.session['photo']
+    return render(request,'dashboard.html',{caption:'caption',photo:'photo'})
+    #return HttpResponse("this is social media")
 def login(request):
     return render(request,'home/login.html')
 def register(request):
     return render(request,'home/register.html')
+def upload(request):
+    return render(request,'home/post_image.html')
 def profile(request):
     return HttpResponse("this is profile page")
 def profile_edit(request):
@@ -21,8 +26,9 @@ def post(request):
         if request.method=='POST':
             form=postimageform(request.POST,request.FILES)
             form.save()
-            img_obj = form.instance
-            return redirect("")
+            request.session['caption']=caption
+            request.session['photo']=photo
+            return redirect('/')
 
 def handle_register(request):
     if request.method == 'POST':

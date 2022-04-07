@@ -5,6 +5,7 @@ from django.utils.timezone import now
 from django.conf import settings
 from django.db.models.signals import post_save
 from django.utils.text import slugify
+from django.forms import ModelForm
 
 def user_directory_path(instance, filename):
     return'user-{0}/{1}'.format(instance.user.id,filename)
@@ -21,6 +22,10 @@ class user_post(models.Model):
 
     def __str__(self):
         return self.caption
+class postimage(ModelForm):
+    class Meta:
+        model = user_post
+        fields=['image','caption']
 
 
 class user_profile(models.Model):

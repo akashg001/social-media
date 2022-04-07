@@ -1,9 +1,8 @@
 from django.shortcuts import render,HttpResponse,redirect
-from .models import user_profile,user_post
+from .models import user_profile,user_post,postimage
 from django.contrib.auth.models import User
 from django.contrib.auth import login as dj_login
 from django.contrib.auth import authenticate
-from home.forms import postimage
 
 
 def index(request):

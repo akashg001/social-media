@@ -22,10 +22,7 @@ class user_post(models.Model):
 
     def __str__(self):
         return self.caption
-class postimage(ModelForm):
-    class Meta:
-        model = user_post
-        fields=['image','caption']
+
 
 
 class user_profile(models.Model):

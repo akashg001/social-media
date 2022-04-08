@@ -11,7 +11,6 @@ urlpatterns = [
     path('post/',views.post,name="post"),
     path('handle_register/',views.handle_register,name="handle_register"),
     path('handlelogin/',views.handlelogin,name="handlelogin"),
-    path('post/',views.post,name="post"),
     path('upload/',views.upload,name="upload")
     
  ]

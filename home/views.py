@@ -1,15 +1,13 @@
 from django.shortcuts import render,HttpResponse,redirect
-from .models import user_profile,user_post,postimage
+from .models import user_profile,user_post
 from django.contrib.auth.models import User
 from django.contrib.auth import login as dj_login
 from django.contrib.auth import authenticate
+from .forms import postimage
 
 
 def index(request):
-    caption = request.session['caption']
-    photo = request.session['photo']
-    return render(request,'dashboard.html',{caption:'caption',photo:'photo'})
-    #return HttpResponse("this is social media")
+    return HttpResponse("this is social media")
 def login(request):
     return render(request,'home/login.html')
 def register(request):
@@ -23,11 +21,19 @@ def profile_edit(request):
 def post(request):
     if request.session.has_key('is_logged'):
         if request.method=='POST':
-            form=postimageform(request.POST,request.FILES)
-            form.save()
-            request.session['caption']=caption
-            request.session['photo']=photo
-            return redirect('/')
+            form=postimage(request.POST,request.FILES)
+            if form.is_valid():
+                images = form.cleaned_data['image']
+                img_caption = form.cleaned_data['caption']
+                p=postimage(caption = img_caption,image = images,date_subscribed=datetime.now(),message_recieved=0)
+                p.save()
+                return render(request,'home/dashboard.html',{form:form})
+            else:
+                return HttpResponse("form is not valid")
+        else:
+            return HttpResponse("not uploaded")
+    else:
+        return HttpResponse("not logged in")
 
 def handle_register(request):
     if request.method == 'POST':

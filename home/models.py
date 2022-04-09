@@ -12,13 +12,11 @@ def user_directory_path(instance, filename):
    
 class user_post(models.Model):
     user = models.ForeignKey(User,default = 1, on_delete=models.CASCADE)
-    image = models.ImageField(upload_to='image')
-    likes= models.BigIntegerField()
+    image = models.ImageField(upload_to='')
+    likes= models.BigIntegerField(null=True)
     caption = models.CharField(max_length=200)
     comment = models.TextField(max_length=1000)
-    date = models.DateTimeField(auto_now=True, auto_now_add=False)
-    class meta:
-        db_table:'userpost'
+    date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.caption

@@ -3,8 +3,7 @@ from .models import user_profile,user_post
 from django.contrib.auth.models import User
 from django.contrib.auth import login as dj_login
 from django.contrib.auth import authenticate
-from .forms import postimage
-
+from django.core.files.storage import FileSystemStorage
 
 def index(request):
     return HttpResponse("this is social media")
@@ -21,17 +20,17 @@ def profile_edit(request):
 def post(request):
     if request.session.has_key('is_logged'):
         if request.method=='POST':
-            form=postimage(request.POST,request.FILES)
-            if form.is_valid():
-                images = form.cleaned_data['image']
-                img_caption = form.cleaned_data['caption']
-                p=postimage(caption = img_caption,image = images,date_subscribed=datetime.now(),message_recieved=0)
-                p.save()
-                return render(request,'home/dashboard.html',{form:form})
-            else:
-                return HttpResponse("form is not valid")
+            caption=request.POST['caption']
+            image = request.FILES['image']
+            files = user_post(caption = caption,image = image)
+            files.save()
+            context = {'caption':files.caption,'image':files.image}
+            return render(request,'home/dashboard.html',context)
+            
         else:
             return HttpResponse("not uploaded")
+        files=user_post()
+        return render(request,'home/dashboard.html',{'files':files})
     else:
         return HttpResponse("not logged in")
 

@@ -3,10 +3,13 @@ from .models import user_profile,user_post
 from django.contrib.auth.models import User
 from django.contrib.auth import login as dj_login
 from django.contrib.auth import authenticate
-from django.core.files.storage import FileSystemStorage
 
 def index(request):
-    return HttpResponse("this is social media")
+    request.POST['caption'] = caption
+    request.FILES['image'] = image
+    context = {'caption':caption,'image':image}
+    return render(request,'home/dashboard.html',context)
+    #return HttpResponse("this is social media")
 def login(request):
     return render(request,'home/login.html')
 def register(request):
@@ -24,8 +27,7 @@ def post(request):
             image = request.FILES['image']
             files = user_post(caption = caption,image = image)
             files.save()
-            context = {'caption':files.caption,'image':files.image}
-            return render(request,'home/dashboard.html',context)
+            return redirect('/')
             
         else:
             return HttpResponse("not uploaded")

@@ -12,7 +12,7 @@ def user_directory_path(instance, filename):
    
 class user_post(models.Model):
     user = models.ForeignKey(User,default = 1, on_delete=models.CASCADE)
-    image = models.ImageField(upload_to='')
+    image = models.ImageField(upload_to='images/')
     likes= models.BigIntegerField(null=True)
     caption = models.CharField(max_length=200)
     comment = models.TextField(max_length=1000)

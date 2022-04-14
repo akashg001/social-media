@@ -1,4 +1,10 @@
 {% load static %}
+
+{% if message %}
+<script>
+    alert('{{ message }}');
+</script>
+{% endif %}
 <!DOCTYPE html>
 <html>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -27,7 +33,6 @@
     <p><input placeholder="yyyy" oninput="this.className = ''" name="yyyy"></p>
   </div>-->
   <div class="tab">Login Info:
-    <p><input placeholder="Username..." id="uname" oninput="this.className = ''" name="uname"></p>
     <p><input placeholder="Password..." id="pass1" oninput="this.className = ''" name="pass1" type="password"></p>
     <p><input placeholder="type Password again" id="pass2" oninput="this.className = ''" name="pass2" type="password"></p>
   </div>

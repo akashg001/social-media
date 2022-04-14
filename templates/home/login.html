@@ -1,4 +1,10 @@
 {%load static %}
+
+{% if message %}
+<script>
+    alert('{{ message }}');
+</script>
+{% endif %}
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
@@ -18,9 +24,9 @@
       <form method="POST" action="{% url 'handlelogin'%}">
         {% csrf_token %}
         <div class="field">
-            <label class="label" for="loginuname">Username</label>
+            <label class="label" for="email">email</label>
             <div class="control has-icons-left has-icons-right">
-              <input class="input is-success" type="text" placeholder="Text input" value="Username" id="loginuname" name="loginuname">
+              <input class="input is-success" type="text" placeholder="Text input" value="Username" id="email" name="email">
               <span class="icon is-small is-left">
                 <i class="fas fa-user"></i>
               </span>
@@ -32,9 +38,9 @@
           </div>
         
           <div class="field">
-            <label class="label" for="loginpassword1">Password</label>
+            <label class="label" for="pasw">Password</label>
             <div class="control has-icons-left has-icons-right">
-              <input class="input is-success" type="password" placeholder="Passwrod" id="loginpassword1" name="loginpassword1">
+              <input class="input is-success" type="password" placeholder="Passwrod" id="pasw" name="pasw">
               <span class="icon is-small is-left">
                 <i class="fas fa-password"></i>
               </span>

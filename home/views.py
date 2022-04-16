@@ -9,7 +9,7 @@ config = {
     "messagingSenderId": "150668275038",
     "appId": "1:150668275038:web:489d68701f9caf6c8c33cf",
     "measurementId": "G-YJ0J37234B",
-    "databaseURL": ""
+    "databaseURL": "https://console.firebase.google.com/u/0/project/social-media-3df5c/database/social-media-3df5c-default-rtdb/data/~2F"
   }
 
 firebase = pyrebase.initialize_app(config)
@@ -68,9 +68,9 @@ def handle_register(request):
 
 def handlelogin(request):
     email = request.POST.get('email')
-    pasw = request.POST.get('pass')
+    passs = request.POST.get('pass1')
     try:
-        user=authe.sign_in_with_email_and_password(email,pasw)
+        user=authe.sign_in_with_email_and_password(email,passs)
     except:
         message="Invalid Credentials!! please check details"
         return render(request,"home/login.html",{"message":message})

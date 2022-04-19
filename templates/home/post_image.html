@@ -16,9 +16,46 @@
         <form method="POST" enctype="multipart/form-data" action="{% url 'post' %}">
             {% csrf_token %}
             <input type="text" value="caption" id="caption" name="caption">
-            <input type="file" value="image" id="image" name="image">
+            <input type="file" value="file" id="file" name="file[]">
+            <input type="hidden" name="url" id="url">
+            <button type="button" onclick="uploadimage()">upload image</button>
             <button type="submit">Upload</button>
         </form>
         
     </body>
+    <script>
+// Set the configuration for your app
+// TODO: Replace with your app's config object
+var firebaseConfig = {
+    apiKey: "AIzaSyDd738Oycvch0gXs8rw7K-i31fOg_xJLdQ",
+    authDomain: "social-media-3df5c.firebaseapp.com",
+    projectId: "social-media-3df5c",
+    storageBucket: "social-media-3df5c.appspot.com",
+    messagingSenderId: "150668275038",
+    appId: "1:150668275038:web:489d68701f9caf6c8c33cf",
+    measurementId: "G-YJ0J37234B",
+    databaseURL: "https://console.firebase.google.com/u/0/project/social-media-3df5c/database/social-media-3df5c-default-rtdb/data/~2F"
+};
+firebase.initializeApp(firebaseConfig);
+
+
+// Get a reference to the storage service, which is used to create references in your storage bucket
+function uploadimage(){
+var storage = firebase.storage();
+var files = document.getElementById("file").file[0];
+var storageRef = storage.ref();
+var thisref = storageRef.child(files.name).put(files);
+thisref.on('state_changed'function(snapshot){
+    console.log("file uploaded successfully");
+},
+function(error){
+
+},
+function(){
+    var downloadURL=thisref.snapshot.downloadURL;
+    console.log("got url");
+    alert("file uploaded successfully");
+}
+});
+</script>
 </html>

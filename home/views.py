@@ -46,7 +46,7 @@ def post(request):
         #files=user_post()
         #return render(request,'home/dashboard.html',{'files':files})
     #else:
-    return HttpResponse("not logged in")
+    return render(request,"home/dashboard.html")
 
 def handle_register(request):
     fname=request.POST.get('fname')
